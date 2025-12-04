@@ -32,7 +32,10 @@ sensor_data = [
     {"sensor_id": 103, "temperature": 22.8, "humidity": 68.5}
 ]
 
-with open("sensors.csv", "w", newline="") as f:
+import os
+os.makedirs("data/raw", exist_ok=True)
+
+with open("data/raw/sensors.csv", "w", newline="") as f:
     fieldnames = ["sensor_id", "temperature", "humidity"]
     writer = csv.DictWriter(f, fieldnames=fieldnames)
     writer.writeheader()
@@ -57,7 +60,7 @@ print(f"Characters: {chars}")
 print()
 
 # Exercise 4: Data Format Converter
-with open("sensors.csv", "r") as f:
+with open("data/raw/sensors.csv", "r") as f:
     reader = csv.DictReader(f)
     print("Exercise 4:")
     for row in reader:
@@ -86,11 +89,13 @@ print(f"Total sum from all files: {total_sum}")
 print()
 
 # Bonus Challenge
-with open("sensors.csv", "r") as f:
+with open("data/raw/sensors.csv", "r") as f:
     reader = csv.DictReader(f)
     filtered_data = [row for row in reader if float(row["temperature"]) > 23]
 
-with open("sensors_filtered.csv", "w", newline="") as f:
+os.makedirs("data/processed", exist_ok=True)
+
+with open("data/processed/sensors_filtered.csv", "w", newline="") as f:
     if filtered_data:
         fieldnames = filtered_data[0].keys()
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -102,6 +107,13 @@ print("Bonus Challenge:")
 print(f"Filtered {len(filtered_data)} rows to sensors_filtered.csv")
 
 # Cleanup
-for f in ["log.txt", "sensors.csv", "sensors_filtered.csv", "data1.txt", "data2.txt", "data3.txt"]:
+for f in ["log.txt", "data1.txt", "data2.txt", "data3.txt"]:
     if os.path.exists(f):
         os.remove(f)
+
+# Clean up data files
+import shutil
+if os.path.exists("data/raw/sensors.csv"):
+    os.remove("data/raw/sensors.csv")
+if os.path.exists("data/processed/sensors_filtered.csv"):
+    os.remove("data/processed/sensors_filtered.csv")

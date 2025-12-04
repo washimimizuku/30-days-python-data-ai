@@ -45,10 +45,25 @@ def calculate_std_dev(numbers):
     return variance ** 0.5
 """
 
-with open("data_utils.py", "w") as f:
+import os
+import sys
+
+# Write the module file
+module_path = os.path.join(os.path.dirname(__file__), "data_utils.py")
+with open(module_path, "w") as f:
     f.write(data_utils_content)
 
-import data_utils
+# Add current directory to path if not already there
+current_dir = os.path.dirname(__file__) or '.'
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+# Import the module
+import importlib.util
+spec = importlib.util.spec_from_file_location("data_utils", module_path)
+data_utils = importlib.util.module_from_spec(spec)
+sys.modules["data_utils"] = data_utils
+spec.loader.exec_module(data_utils)
 
 print("Exercise 3:")
 test_data = [10, 20, 30, 40, 50]
@@ -59,13 +74,13 @@ print(f"Std Dev: {data_utils.calculate_std_dev(test_data):.2f}")
 print()
 
 # Exercise 4
-import os
-os.makedirs("my_package", exist_ok=True)
+package_dir = os.path.join(os.path.dirname(__file__), "my_package")
+os.makedirs(package_dir, exist_ok=True)
 
-with open("my_package/__init__.py", "w") as f:
+with open(os.path.join(package_dir, "__init__.py"), "w") as f:
     f.write("# My data processing package\n")
 
-with open("my_package/validators.py", "w") as f:
+with open(os.path.join(package_dir, "validators.py"), "w") as f:
     f.write("""
 def validate_range(value, min_val, max_val):
     return min_val <= value <= max_val
@@ -74,7 +89,7 @@ def validate_type(value, expected_type):
     return isinstance(value, expected_type)
 """)
 
-with open("my_package/processors.py", "w") as f:
+with open(os.path.join(package_dir, "processors.py"), "w") as f:
     f.write("""
 def normalize(values):
     min_val, max_val = min(values), max(values)
@@ -103,8 +118,11 @@ print()
 
 # Cleanup
 import shutil
-os.remove("data_utils.py")
-if os.path.exists("__pycache__"):
-    shutil.rmtree("__pycache__")
-if os.path.exists("my_package"):
-    shutil.rmtree("my_package")
+if os.path.exists(module_path):
+    os.remove(module_path)
+pycache_path = os.path.join(os.path.dirname(__file__), "__pycache__")
+if os.path.exists(pycache_path):
+    shutil.rmtree(pycache_path)
+package_path = os.path.join(os.path.dirname(__file__), "my_package")
+if os.path.exists(package_path):
+    shutil.rmtree(package_path)

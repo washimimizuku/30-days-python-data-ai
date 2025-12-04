@@ -34,13 +34,13 @@ class ETLPipeline:
         # Source 1: CSV file
         print("  Extracting from CSV...")
         csv_data = self._create_csv_source()
-        df_csv = pd.read_csv("sensor_data.csv")
+        df_csv = pd.read_csv("data/raw/sensor_data.csv")
         print(f"    ✓ Loaded {len(df_csv)} records from CSV")
         
         # Source 2: JSON file
         print("  Extracting from JSON...")
         json_data = self._create_json_source()
-        with open("sensor_data.json", "r") as f:
+        with open("data/raw/sensor_data.json", "r") as f:
             data_json = json.load(f)
         df_json = pd.DataFrame(data_json)
         print(f"    ✓ Loaded {len(df_json)} records from JSON")
@@ -76,7 +76,7 @@ class ETLPipeline:
         print(f"  ✓ Handled {missing_before} missing values")
         
         # 3. Data type conversion
-        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        df['timestamp'] = pd.to_datetime(df['timestamp'], format='mixed')
         df['sensor_id'] = df['sensor_id'].astype(int)
         print(f"  ✓ Converted data types")
         
@@ -181,6 +181,17 @@ class ETLPipeline:
             'humidity': ['mean', 'std']
         }).round(2)
         
+        # Convert to JSON-serializable format
+        by_sensor_dict = {}
+        for sensor_id in by_sensor.index:
+            by_sensor_dict[str(sensor_id)] = {
+                'temperature_count': int(by_sensor.loc[sensor_id, ('temperature', 'count')]),
+                'temperature_mean': float(by_sensor.loc[sensor_id, ('temperature', 'mean')]),
+                'temperature_std': float(by_sensor.loc[sensor_id, ('temperature', 'std')]),
+                'humidity_mean': float(by_sensor.loc[sensor_id, ('humidity', 'mean')]),
+                'humidity_std': float(by_sensor.loc[sensor_id, ('humidity', 'std')])
+            }
+        
         # By hour
         by_hour = df.groupby('hour').agg({
             'temperature': 'mean',
@@ -192,8 +203,8 @@ class ETLPipeline:
         
         self.aggregated_data = {
             'overall': overall_stats,
-            'by_sensor': by_sensor.to_dict(),
-            'by_hour': by_hour.to_dict(),
+            'by_sensor': by_sensor_dict,
+            'by_hour': {str(k): v for k, v in by_hour.to_dict('index').items()},
             'by_category': by_category
         }
         
@@ -202,10 +213,13 @@ class ETLPipeline:
         print(f"  ✓ Generated statistics and insights")
         print()
     
-    def load(self, output_dir: str = ".") -> None:
+    def load(self, output_dir: str = "data/processed") -> None:
         """Load data to output"""
         print("STEP 5: LOAD")
         print("-" * 70)
+        
+        # Create output directory
+        os.makedirs(output_dir, exist_ok=True)
         
         # Save cleaned data to CSV
         output_csv = f"{output_dir}/cleaned_sensor_data.csv"
@@ -269,7 +283,8 @@ class ETLPipeline:
             'humidity': np.random.uniform(40, 80, 30)
         }
         df = pd.DataFrame(data)
-        df.to_csv("sensor_data.csv", index=False)
+        os.makedirs("data/raw", exist_ok=True)
+        df.to_csv("data/raw/sensor_data.csv", index=False)
     
     def _create_json_source(self) -> None:
         """Create sample JSON data"""
@@ -283,7 +298,8 @@ class ETLPipeline:
             }
             for i in range(20)
         ]
-        with open("sensor_data.json", "w") as f:
+        os.makedirs("data/raw", exist_ok=True)
+        with open("data/raw/sensor_data.json", "w") as f:
             json.dump(data, f, indent=2)
     
     def _extract_from_api(self) -> pd.DataFrame:
@@ -322,10 +338,14 @@ class ETLPipeline:
     
     def _cleanup(self) -> None:
         """Clean up temporary files"""
-        for f in ["sensor_data.csv", "sensor_data.json", "cleaned_sensor_data.csv",
-                  "analysis_results.json", "pipeline_report.txt"]:
-            if os.path.exists(f):
-                os.remove(f)
+        # Clean up data files
+        for folder in ["data/raw", "data/processed"]:
+            if os.path.exists(folder):
+                for f in os.listdir(folder):
+                    if f != ".gitkeep":
+                        filepath = os.path.join(folder, f)
+                        if os.path.isfile(filepath):
+                            os.remove(filepath)
 
 # Run the pipeline
 if __name__ == "__main__":

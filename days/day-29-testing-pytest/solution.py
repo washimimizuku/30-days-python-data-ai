@@ -85,14 +85,20 @@ def clean_sensor_data(readings):
     # Remove None values
     valid = [r for r in readings if r is not None]
     
-    # Remove outliers (simple method)
-    if len(valid) < 2:
+    # Remove outliers using IQR method
+    if len(valid) < 4:
         return valid
     
-    mean = sum(valid) / len(valid)
-    std = (sum((x - mean) ** 2 for x in valid) / len(valid)) ** 0.5
+    sorted_data = sorted(valid)
+    n = len(sorted_data)
+    q1 = sorted_data[n // 4]
+    q3 = sorted_data[3 * n // 4]
+    iqr = q3 - q1
     
-    cleaned = [r for r in valid if abs(r - mean) <= 2 * std]
+    lower_bound = q1 - 1.5 * iqr
+    upper_bound = q3 + 1.5 * iqr
+    
+    cleaned = [r for r in valid if lower_bound <= r <= upper_bound]
     return cleaned
 
 def test_clean_sensor_data():

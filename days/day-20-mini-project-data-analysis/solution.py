@@ -16,8 +16,9 @@ class DataAnalyzer:
     
     def load_data(self, filename):
         """Load data from CSV"""
-        print(f"Loading data from {filename}...")
-        self.data = pd.read_csv(filename, parse_dates=["timestamp"])
+        filepath = f"data/raw/{filename}"
+        print(f"Loading data from {filepath}...")
+        self.data = pd.read_csv(filepath, parse_dates=["timestamp"])
         print(f"Loaded {len(self.data)} rows")
         return self
     
@@ -123,7 +124,9 @@ class DataAnalyzer:
             }
         }
         
-        with open(filename, "w") as f:
+        os.makedirs("data/processed", exist_ok=True)
+        filepath = f"data/processed/{filename}"
+        with open(filepath, "w") as f:
             json.dump(report, f, indent=2)
         
         print(f"Results exported successfully")
@@ -173,8 +176,9 @@ if __name__ == "__main__":
     # Add some duplicates
     df = pd.concat([df, df.iloc[:5]], ignore_index=True)
     
-    df.to_csv("sensor_data_raw.csv", index=False)
-    print(f"Created sensor_data_raw.csv with {len(df)} rows\n")
+    os.makedirs("data/raw", exist_ok=True)
+    df.to_csv("data/raw/sensor_data_raw.csv", index=False)
+    print(f"Created data/raw/sensor_data_raw.csv with {len(df)} rows\n")
     
     # Run analysis pipeline
     analyzer = DataAnalyzer()
@@ -187,5 +191,10 @@ if __name__ == "__main__":
     print("\n✅ Project Complete!")
     
     # Cleanup
-    os.remove("sensor_data_raw.csv")
-    os.remove("analysis_results.json")
+    for folder in ["data/raw", "data/processed"]:
+        if os.path.exists(folder):
+            for f in os.listdir(folder):
+                if f != ".gitkeep":
+                    filepath = os.path.join(folder, f)
+                    if os.path.isfile(filepath):
+                        os.remove(filepath)

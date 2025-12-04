@@ -8,6 +8,9 @@ from datetime import datetime
 import os
 
 # Create sample data
+os.makedirs("data/raw", exist_ok=True)
+os.makedirs("data/processed", exist_ok=True)
+
 sample_data = """timestamp,sensor_id,temperature,humidity,status
 2024-01-01 10:00:00,101,23.5,65.2,active
 2024-01-01 10:05:00,102,invalid,62.8,active
@@ -15,7 +18,7 @@ sample_data = """timestamp,sensor_id,temperature,humidity,status
 2024-01-01 10:15:00,101,24.1,64.5,error
 2024-01-01 10:20:00,102,23.9,63.2,active"""
 
-with open("sensors_raw.csv", "w") as f:
+with open("data/raw/sensors_raw.csv", "w") as f:
     f.write(sample_data)
 
 def read_sensor_data(filename):
@@ -83,7 +86,7 @@ def main():
     
     # Read data
     print("1. Reading data...")
-    raw_data = read_sensor_data("sensors_raw.csv")
+    raw_data = read_sensor_data("data/raw/sensors_raw.csv")
     print(f"   Read {len(raw_data)} readings")
     
     # Clean data
@@ -105,14 +108,16 @@ def main():
         "statistics": stats,
         "clean_data": clean_readings
     }
-    export_to_json(results, "sensor_results.json")
-    print("   Exported to sensor_results.json")
+    export_to_json(results, "data/processed/sensor_results.json")
+    print("   Exported to data/processed/sensor_results.json")
     
     print("\n✅ Processing complete!")
     
     # Cleanup
-    os.remove("sensors_raw.csv")
-    os.remove("sensor_results.json")
+    if os.path.exists("data/raw/sensors_raw.csv"):
+        os.remove("data/raw/sensors_raw.csv")
+    if os.path.exists("data/processed/sensor_results.json"):
+        os.remove("data/processed/sensor_results.json")
 
 if __name__ == "__main__":
     main()

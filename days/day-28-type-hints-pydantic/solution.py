@@ -56,7 +56,7 @@ print()
 print("Exercise 3: Pydantic Models")
 
 try:
-    from pydantic import BaseModel, Field, validator
+    from pydantic import BaseModel, Field, field_validator
     
     class SensorReading(BaseModel):
         sensor_id: int
@@ -65,13 +65,15 @@ try:
         timestamp: datetime
         location: Optional[str] = None
         
-        @validator('temperature')
+        @field_validator('temperature')
+        @classmethod
         def validate_temperature(cls, v):
             if not -50 <= v <= 50:
                 raise ValueError('Temperature must be between -50 and 50')
             return v
         
-        @validator('humidity')
+        @field_validator('humidity')
+        @classmethod
         def validate_humidity(cls, v):
             if not 0 <= v <= 100:
                 raise ValueError('Humidity must be between 0 and 100')
@@ -86,8 +88,8 @@ try:
         location="Building A"
     )
     print(f"Valid reading: {reading}")
-    print(f"As dict: {reading.dict()}")
-    print(f"As JSON: {reading.json()}")
+    print(f"As dict: {reading.model_dump()}")
+    print(f"As JSON: {reading.model_dump_json()}")
     
     # Invalid reading (will raise error)
     try:
@@ -146,19 +148,22 @@ print("Exercise 5: API Models")
 try:
     from pydantic import BaseModel
     
+    from pydantic import ConfigDict
+    
     class SensorCreateRequest(BaseModel):
-        sensor_id: int
-        type: str
-        location: str
-        
-        class Config:
-            schema_extra = {
+        model_config = ConfigDict(
+            json_schema_extra={
                 "example": {
                     "sensor_id": 101,
                     "type": "temperature",
                     "location": "Building A"
                 }
             }
+        )
+        
+        sensor_id: int
+        type: str
+        location: str
     
     class SensorResponse(BaseModel):
         sensor_id: int
@@ -179,10 +184,10 @@ try:
     
     # Simulate API response
     response = SensorResponse(
-        **request.dict(),
+        **request.model_dump(),
         created_at=datetime.now()
     )
-    print(f"Response: {response.json(indent=2)}")
+    print(f"Response: {response.model_dump_json(indent=2)}")
     
 except ImportError:
     print("Pydantic not installed")

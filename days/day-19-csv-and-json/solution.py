@@ -7,6 +7,10 @@ import json
 import csv
 import os
 
+# Create data directories
+os.makedirs("data/raw", exist_ok=True)
+os.makedirs("data/processed", exist_ok=True)
+
 # Exercise 1
 print("Exercise 1:")
 data = {
@@ -17,11 +21,11 @@ data = {
 df = pd.DataFrame(data)
 
 # Write to CSV
-df.to_csv("students.csv", index=False)
+df.to_csv("data/raw/students.csv", index=False)
 print("Written to students.csv")
 
 # Read CSV
-df_read = pd.read_csv("students.csv")
+df_read = pd.read_csv("data/raw/students.csv")
 print("Read from CSV:")
 print(df_read)
 print()
@@ -35,11 +39,11 @@ edge_case_data = """id,name,comment,score
 3,"Charlie",,78
 4,"David","Perfect score!",95"""
 
-with open("students_edge.csv", "w") as f:
+with open("data/raw/students_edge.csv", "w") as f:
     f.write(edge_case_data)
 
 # Read with proper handling
-df_edge = pd.read_csv("students_edge.csv", na_values=["", "NA", "null"])
+df_edge = pd.read_csv("data/raw/students_edge.csv", na_values=["", "NA", "null"])
 print("CSV with edge cases:")
 print(df_edge)
 print(f"\nMissing values:\n{df_edge.isnull().sum()}")
@@ -57,12 +61,12 @@ json_data = {
     "year": 2024
 }
 
-with open("students.json", "w") as f:
+with open("data/raw/students.json", "w") as f:
     json.dump(json_data, f, indent=2)
 print("Written to students.json")
 
 # Read JSON
-with open("students.json", "r") as f:
+with open("data/raw/students.json", "r") as f:
     loaded_data = json.load(f)
 print("Read from JSON:")
 print(json.dumps(loaded_data, indent=2))
@@ -71,10 +75,10 @@ print()
 # Exercise 4
 print("Exercise 4:")
 # CSV to JSON
-df_csv = pd.read_csv("students.csv")
+df_csv = pd.read_csv("data/raw/students.csv")
 json_from_csv = df_csv.to_dict(orient="records")
 
-with open("students_from_csv.json", "w") as f:
+with open("data/processed/students_from_csv.json", "w") as f:
     json.dump(json_from_csv, f, indent=2)
 print("Converted CSV to JSON")
 
@@ -90,7 +94,7 @@ for student in json_data["students"]:
     students_flat.append(flat_student)
 
 df_from_json = pd.DataFrame(students_flat)
-df_from_json.to_csv("students_from_json.csv", index=False)
+df_from_json.to_csv("data/processed/students_from_json.csv", index=False)
 print("Converted JSON to CSV")
 print(df_from_json)
 print()
@@ -104,11 +108,11 @@ sensor_csv = """timestamp,sensor_id,temperature,humidity
 2024-01-01 10:10:00,103,22.8,68.5
 2024-01-01 10:15:00,101,23.9,64.8"""
 
-with open("sensors.csv", "w") as f:
+with open("data/raw/sensors.csv", "w") as f:
     f.write(sensor_csv)
 
 # Read and process
-df_sensors = pd.read_csv("sensors.csv", parse_dates=["timestamp"])
+df_sensors = pd.read_csv("data/raw/sensors.csv", parse_dates=["timestamp"])
 
 # Enrich data
 df_sensors["temp_f"] = df_sensors["temperature"] * 9/5 + 32
@@ -134,7 +138,7 @@ result = {
 for reading in result["readings"]:
     reading["timestamp"] = reading["timestamp"].isoformat()
 
-with open("sensor_report.json", "w") as f:
+with open("data/processed/sensor_report.json", "w") as f:
     json.dump(result, f, indent=2)
 
 print("Processed sensor data and exported to JSON")
@@ -150,8 +154,9 @@ print("  for chunk in df_chunks:")
 print("      process(chunk)")
 
 # Cleanup
-for f in ["students.csv", "students_edge.csv", "students.json", 
-          "students_from_csv.json", "students_from_json.csv", 
-          "sensors.csv", "sensor_report.json"]:
-    if os.path.exists(f):
-        os.remove(f)
+import shutil
+for folder in ["data/raw", "data/processed"]:
+    if os.path.exists(folder):
+        for f in os.listdir(folder):
+            if f != ".gitkeep":
+                os.remove(os.path.join(folder, f))
