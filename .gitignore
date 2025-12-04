@@ -1,9 +1,17 @@
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+
+# Distribution / packaging
 build/
 develop-eggs/
 dist/
@@ -20,29 +28,20 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual Environment
-venv/
-env/
-ENV/
-.venv
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
 
-# IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+
+# OS
 .DS_Store
-
-# Jupyter Notebook
-.ipynb_checkpoints
-*.ipynb
-
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
+Thumbs.db
 
 # Data files (keep structure, ignore content)
 data/raw/*
@@ -53,18 +52,9 @@ data/processed/*
 # Temporary files
 *.log
 *.tmp
-*.temp
-.cache/
+temp/
+tmp/
 
-# OS
-Thumbs.db
-.DS_Store
-
-# Project specific
-*.csv
-*.json
-*.xlsx
-*.png
-*.jpg
-*.jpeg
-*.pdf
+# Environment variables
+.env
+.env.local

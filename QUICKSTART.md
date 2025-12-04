@@ -2,6 +2,8 @@
 
 Get started in 5 minutes! 🚀
 
+> **📝 Note for macOS users:** Use `python3` instead of `python` throughout this guide. Your shell likely has `python` aliased to system Python, but `python3` will correctly use the virtual environment.
+
 ## Prerequisites
 
 - Computer (Windows, Mac, or Linux)
@@ -54,21 +56,59 @@ cd 30-days-python-data-ai
 
 ---
 
-## Step 3: Install Required Packages (2 minutes)
+## Step 3: Create Virtual Environment (1 minute)
 
 Open terminal/command prompt in the project folder:
 
 ```bash
-# Install core packages (required)
-pip install numpy pandas matplotlib requests
+# Create virtual environment
+# On Mac/Linux:
+python3 -m venv venv
 
-# OR install everything (including optional)
-pip install -r requirements.txt
+# On Windows:
+python -m venv venv
+
+# Activate it
+# On Mac/Linux:
+source venv/bin/activate
+
+# On Windows:
+venv\Scripts\activate
+```
+
+You should see `(venv)` in your terminal prompt.
+
+**Verify it's working (Mac/Linux):**
+```bash
+which python3  # Should show: .../venv/bin/python3 ✓
+# Note: 'python' might still show system Python due to shell aliases
+# That's OK - just use 'python3' for everything
 ```
 
 ---
 
-## Step 4: Verify Setup (1 minute)
+## Step 4: Install Required Packages (2 minutes)
+
+With the virtual environment activated:
+
+```bash
+# Mac/Linux - use python3 or pip:
+python3 -m pip install -r requirements.txt
+# OR just:
+pip install -r requirements.txt
+
+# Windows:
+pip install -r requirements.txt
+
+# For core packages only:
+pip install numpy pandas matplotlib requests
+```
+
+---
+
+## Step 5: Verify Setup (1 minute)
+
+With virtual environment still activated:
 
 ```bash
 python resources/test_setup.py
@@ -86,7 +126,7 @@ You should see:
 
 ---
 
-## Step 5: Start Learning! 🎉
+## Step 6: Start Learning! 🎉
 
 Open the first lesson:
 ```bash
@@ -102,7 +142,14 @@ Or just open `days/day-01-variables-and-data-types/README.md` in any text editor
 
 ## Daily Routine
 
-Each day, follow this pattern:
+**Before starting each day:**
+```bash
+# Make sure virtual environment is activated
+source venv/bin/activate  # Mac/Linux
+venv\Scripts\activate     # Windows
+```
+
+**Then follow this pattern:**
 
 1. **📖 Read** the `README.md` (15 min)
    - Learn the concepts
@@ -119,6 +166,11 @@ Each day, follow this pattern:
 4. **🎯 Quiz** with `quiz.md` (5 min)
    - Test your understanding
    - Review if needed
+
+**When done for the day:**
+```bash
+deactivate  # Exit virtual environment
+```
 
 ---
 
@@ -168,6 +220,34 @@ Don't rush these - they're where you consolidate your learning!
 - Try `python3` instead of `python`
 - Check PATH environment variable
 
+### Virtual environment not activating
+- Make sure you're in the project folder
+- Try `python3 -m venv venv` instead
+- On Windows, you may need to run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+### macOS: "externally-managed-environment" error
+Even with venv activated, you might see this error.
+
+**Why:** Your shell has `python` aliased to system Python, but `python3` points to venv.
+
+**Check:**
+```bash
+which python   # Shows: /opt/homebrew/bin/python3 (system)
+which python3  # Shows: .../venv/bin/python3 (venv) ✓
+```
+
+**Solution: Use `python3` instead of `python`**
+```bash
+# Install packages with python3
+python3 -m pip install -r requirements.txt
+
+# Run scripts with python3
+python3 resources/test_setup.py
+
+# Or use pip directly (it's in venv)
+pip install -r requirements.txt
+```
+
 ### "pip not found"
 ```bash
 python -m pip install --upgrade pip
@@ -175,14 +255,24 @@ python -m pip install --upgrade pip
 
 ### Package installation fails
 ```bash
+# Make sure virtual environment is activated first!
 pip install --upgrade pip setuptools wheel
 pip install numpy pandas matplotlib requests
 ```
 
+### Forgot to activate virtual environment?
+```bash
+# You'll see packages not found errors
+# Solution: Activate it!
+source venv/bin/activate  # Mac/Linux
+venv\Scripts\activate     # Windows
+```
+
 ### Still stuck?
-1. Check [resources/SETUP.md](./resources/SETUP.md) for detailed instructions
-2. Google the error message
-3. Ask in community forums
+1. Check [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for detailed solutions
+2. Check [resources/SETUP.md](./resources/SETUP.md) for detailed instructions
+3. Google the error message
+4. Ask in community forums
 
 ---
 

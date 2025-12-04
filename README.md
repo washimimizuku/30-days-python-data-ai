@@ -116,9 +116,11 @@ You'll be ready for:
 
 1. **Install Python 3.11+**
 2. **Download** this repository
-3. **Install packages**: `pip install numpy pandas matplotlib requests`
-4. **Verify setup**: `python resources/test_setup.py`
-5. **Start learning**: Open `days/day-01-variables-and-data-types/README.md`
+3. **Create virtual environment**: `python -m venv venv`
+4. **Activate it**: `source venv/bin/activate` (Mac/Linux) or `venv\Scripts\activate` (Windows)
+5. **Install packages**: `pip install numpy pandas matplotlib requests`
+6. **Verify setup**: `python resources/test_setup.py`
+7. **Start learning**: Open `days/day-01-variables-and-data-types/README.md`
 
 👉 **See [QUICKSTART.md](./QUICKSTART.md) for detailed step-by-step instructions**
 

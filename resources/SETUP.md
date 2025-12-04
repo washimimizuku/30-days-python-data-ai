@@ -51,24 +51,56 @@ pip --version
 
 ## Step 3: Set Up Virtual Environment
 
+**Why use a virtual environment?**
+- Isolates project dependencies
+- Avoids conflicts with other Python projects
+- Makes it easy to reproduce your setup
+- Best practice for Python development
+
 ```bash
 # Navigate to bootcamp folder
 cd 30-days-python-data-ai
 
 # Create virtual environment
+# macOS/Linux (use python3):
+python3 -m venv venv
+
+# Windows:
 python -m venv venv
 
 # Activate it
-# Windows:
-venv\Scripts\activate
 # macOS/Linux:
 source venv/bin/activate
 
-# Install required packages
+# Windows (Command Prompt):
+venv\Scripts\activate
+
+# Windows (PowerShell):
+venv\Scripts\Activate.ps1
+
+# You should see (venv) in your prompt
+
+# Verify (macOS/Linux):
+which python  # Should show: .../venv/bin/python
+```
+
+**Install packages:**
+```bash
+# Core packages (required)
+pip install numpy pandas matplotlib requests
+
+# OR install everything (including optional)
 pip install -r requirements.txt
 ```
 
+**Deactivate when done:**
+```bash
+deactivate
+```
+
 ## Step 4: Verify Setup
+
+**Make sure virtual environment is activated** (you should see `(venv)` in prompt):
 
 ```bash
 # Run test script
@@ -78,10 +110,11 @@ python resources/test_setup.py
 Should output:
 ```
 ✅ Python version: 3.11.x
-✅ NumPy installed
-✅ Pandas installed
-✅ Matplotlib installed
-✅ All set! Ready to start Day 1
+✅ numpy installed
+✅ pandas installed
+✅ matplotlib installed
+✅ requests installed
+✅ All core packages installed! Ready to start Day 1
 ```
 
 ## Folder Structure
@@ -110,10 +143,23 @@ Should output:
 
 ## Daily Workflow
 
+**Start each session:**
+```bash
+# Activate virtual environment
+source venv/bin/activate  # Mac/Linux
+venv\Scripts\activate     # Windows
+```
+
+**Then:**
 1. **Read** the lesson in `days/day-XX-.../README.md` (15 min)
 2. **Code** the exercises in `exercise.py` (40 min)
 3. **Check** `solution.py` if stuck (don't peek too early!)
 4. **Quiz** yourself with `quiz.md` (5 min)
+
+**End each session:**
+```bash
+deactivate  # Exit virtual environment
+```
 
 **Note**: Project days (10, 20, 30) may take 1.5-2 hours - that's normal!
 
@@ -121,20 +167,64 @@ Should output:
 
 ### Python not found
 - Restart terminal after installation
+- Try `python3` instead of `python`
 - Check PATH environment variable
+
+### Virtual environment won't activate
+**Windows PowerShell:**
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+**macOS/Linux:**
+- Make sure you're in the project directory
+- Use `python3` instead of `python`: `python3 -m venv venv`
+- After activation, verify: `which python` should show `venv/bin/python`
+
+**macOS with Homebrew Python:**
+If you see "externally-managed-environment" error even with venv activated:
+```bash
+# Your shell might have a python alias
+# Solution: Use python3 explicitly
+deactivate
+rm -rf venv
+python3 -m venv venv
+source venv/bin/activate
+python3 -m pip install -r requirements.txt
+```
 
 ### pip not working
 ```bash
 python -m pip install --upgrade pip
 ```
 
-### Virtual environment issues
-- Delete `venv` folder and recreate
-- Use `python3` instead of `python` on some systems
-
 ### Package installation fails
 ```bash
+# Make sure virtual environment is activated!
 pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
+```
+
+### "Module not found" errors
+- Check if virtual environment is activated (look for `(venv)` in prompt)
+- If not activated, run: `source venv/bin/activate` (Mac/Linux) or `venv\Scripts\activate` (Windows)
+- Reinstall packages if needed
+
+### Starting fresh
+```bash
+# Deactivate if active
+deactivate
+
+# Remove old virtual environment
+rm -rf venv  # Mac/Linux
+rmdir /s venv  # Windows
+
+# Create new one
+python -m venv venv
+source venv/bin/activate  # Mac/Linux
+venv\Scripts\activate     # Windows
+
+# Reinstall packages
 pip install -r requirements.txt
 ```
 
