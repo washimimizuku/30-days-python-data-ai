@@ -122,10 +122,21 @@ You'll be ready for:
 
 ## 🚀 Getting Started
 
+### Recommended: Fork & Track Your Progress
+
+**Why fork?** Track your learning journey, build your portfolio, and practice Git!
+
+1. **Fork this repository** on GitHub (click "Fork" button)
+2. **Clone your fork**: `git clone https://github.com/YOUR-USERNAME/30-days-python-data-ai.git`
+3. **Follow setup below**
+4. **Commit daily** as you complete exercises
+
+👉 **See [docs/GIT_SETUP.md](./docs/GIT_SETUP.md) for complete Git workflow**
+
 ### Quick Start (5 minutes)
 
 1. **Install Python 3.11+**
-2. **Download** this repository
+2. **Fork & clone** this repository (or download if not using Git)
 3. **Create virtual environment**: `python -m venv venv`
 4. **Activate it**: `source venv/bin/activate` (Mac/Linux) or `venv\Scripts\activate` (Windows)
 5. **Install packages**: `pip install numpy pandas matplotlib requests`
@@ -157,10 +168,32 @@ You'll be ready for:
 
 - **Code along** with examples - don't just read
 - **Type out solutions** - don't copy-paste
+- **Commit daily** - track your progress with Git (see below)
 - **Take your time** - especially on project days (10, 20, 30)
 - **Take breaks** - it's okay to split a day across multiple sessions
 - **Practice more** - build small projects to reinforce learning
 - **Ask questions** - use community resources when stuck
+
+---
+
+## 📊 Track Your Progress with Git
+
+**Recommended**: Fork this repository and commit your solutions daily!
+
+### Benefits:
+- 🎯 **Portfolio** - Show employers your learning journey
+- 💾 **Backup** - Never lose your work
+- 📈 **Motivation** - See your progress with GitHub's green squares
+- 🛠️ **Git Practice** - Learn version control alongside Python
+
+### Quick Start:
+1. **Fork** this repository on GitHub
+2. **Clone** your fork: `git clone https://github.com/YOUR-USERNAME/30-days-python-data-ai.git`
+3. **Complete** each day's exercises
+4. **Commit** daily: `git commit -m "Complete Day X: Topic"`
+5. **Push** to GitHub: `git push origin main`
+
+👉 **See [docs/GIT_SETUP.md](./docs/GIT_SETUP.md) for complete Git workflow and best practices**
 
 ---
 

@@ -9,6 +9,29 @@ Get started in 5 minutes! 🚀
 - Computer (Windows, Mac, or Linux)
 - 5GB free disk space
 - Internet connection
+- GitHub account (optional, but recommended for tracking progress)
+
+---
+
+## Step 0: Fork the Repository (Recommended)
+
+**Why fork?** Track your progress, build your portfolio, and practice Git!
+
+### Option A: Fork (Recommended)
+
+1. **Go to**: https://github.com/YOUR-ORG/30-days-python-data-ai
+2. **Click "Fork"** button (top right)
+3. **Clone your fork**:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/30-days-python-data-ai.git
+   cd 30-days-python-data-ai
+   ```
+
+### Option B: Download (No Git)
+
+If you don't want to use Git, just download the ZIP file from GitHub.
+
+> 💡 **Tip**: Using Git lets you commit your solutions daily and build a portfolio!
 
 ---
 
@@ -273,6 +296,41 @@ venv\Scripts\activate     # Windows
 2. Check [docs/SETUP.md](./docs/SETUP.md) for detailed instructions
 3. Google the error message
 4. Ask in community forums
+
+---
+
+## Daily Workflow (If Using Git)
+
+### Each Day:
+
+1. **Start the day**:
+   ```bash
+   cd 30-days-python-data-ai
+   source venv/bin/activate  # or venv\Scripts\activate on Windows
+   ```
+
+2. **Complete the exercises** in `days/day-XX-topic/exercise.py`
+
+3. **Commit your work**:
+   ```bash
+   git add days/day-XX-topic/exercise.py
+   git commit -m "Complete Day XX: Topic Name"
+   git push origin main
+   ```
+
+### Sample Commit Messages:
+```bash
+git commit -m "Complete Day 1: Variables and Data Types"
+git commit -m "Complete Day 10: Mini Project - Data File Processor"
+git commit -m "Complete Day 30: Capstone ETL Pipeline"
+```
+
+### Track Your Progress:
+- Your GitHub profile will show daily commits (green squares!)
+- Employers can see your learning journey
+- You have a backup of all your work
+
+👉 **See [docs/GIT_SETUP.md](./docs/GIT_SETUP.md) for detailed Git workflow**
 
 ---
 
