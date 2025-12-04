@@ -1,0 +1,19 @@
+# 30 Days of Python for Data and AI - Requirements
+
+# Core Requirements (Used in exercises)
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+requests>=2.31.0
+
+# Optional but Recommended
+# These are covered in lessons but not required to run solution files
+pydantic>=2.0.0      # Day 28: Type Hints and Pydantic
+pytest>=7.3.0        # Day 29: Testing with pytest
+jupyter>=1.0.0       # Day 24: Jupyter Notebooks
+
+# Additional Useful Libraries (Optional)
+# Uncomment if you want to explore beyond the curriculum
+# seaborn>=0.12.0    # Enhanced visualization
+# plotly>=5.14.0     # Interactive plots
+# scipy>=1.10.0      # Scientific computing
