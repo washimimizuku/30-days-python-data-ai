@@ -8,9 +8,15 @@
 ├── CURRICULUM.md                # Day-by-day curriculum outline
 ├── requirements.txt             # Python dependencies
 │
-├── resources/                   # Learning resources
+├── docs/                        # Documentation
 │   ├── SETUP.md                # Installation and setup guide
+│   ├── CURRICULUM.md           # Day-by-day breakdown
+│   ├── TROUBLESHOOTING.md      # Common issues
+│   └── ...
+│
+├── tools/                       # Utilities
 │   ├── cheatsheet.md           # Python quick reference
+│   └── test_setup.py           # Setup verification
 │   └── test_setup.py           # Setup verification script
 │
 ├── data/                        # Data directories
@@ -107,8 +113,8 @@ Each day contains 4 files:
 ## 🚀 Getting Started
 
 1. Read `README.md` for overview
-2. Check `resources/SETUP.md` for installation
-3. Run `python resources/test_setup.py` to verify setup
+2. Check `docs/SETUP.md` for installation
+3. Run `python tools/test_setup.py` to verify setup
 4. Start with `days/day-01-variables-and-data-types/README.md`
 5. Complete exercises, check solutions, take quiz
 6. Move to next day

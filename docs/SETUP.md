@@ -104,7 +104,7 @@ deactivate
 
 ```bash
 # Run test script
-python resources/test_setup.py
+python tools/test_setup.py
 ```
 
 Should output:
@@ -122,11 +122,14 @@ Should output:
 ```
 30-days-python-data-ai/
 ├── README.md              # Overview
-├── CURRICULUM.md          # Day-by-day breakdown
 ├── requirements.txt       # Python packages
-├── resources/
+├── docs/
 │   ├── SETUP.md          # This file
+│   ├── CURRICULUM.md     # Day-by-day breakdown
+│   └── ...
+├── tools/
 │   ├── cheatsheet.md     # Quick reference
+│   └── test_setup.py     # Verification
 │   └── test_setup.py     # Setup verification
 ├── data/
 │   ├── raw/              # Original data files
@@ -230,7 +233,7 @@ pip install -r requirements.txt
 
 ## Getting Help
 
-- Check `resources/cheatsheet.md` for quick reference
+- Check `tools/cheatsheet.md` for quick reference
 - Google error messages
 - Ask in community Discord
 - Review previous days if concepts are unclear

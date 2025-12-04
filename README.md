@@ -84,26 +84,36 @@ You'll be ready for:
 
 ---
 
-## 📁 Folder Structure
+## 📁 Project Structure
 
 ```
 30-days-python-data-ai/
-├── README.md              # This file
-├── CURRICULUM.md          # Day-by-day breakdown
+├── README.md              # Start here
+├── QUICKSTART.md          # 5-minute setup guide
 ├── requirements.txt       # Python packages
-├── resources/
-│   ├── SETUP.md          # Setup instructions
-│   ├── cheatsheet.md     # Quick reference
-│   └── test_setup.py     # Verify installation
-├── data/
-│   ├── raw/              # Original data files
-│   └── processed/        # Processed data
-└── days/
+│
+├── docs/                  # 📚 Documentation
+│   ├── CURRICULUM.md      # Day-by-day breakdown
+│   ├── SETUP.md           # Detailed setup guide
+│   ├── TROUBLESHOOTING.md # Common issues & fixes
+│   ├── PROJECT_STRUCTURE.md
+│   ├── CONTRIBUTING.md
+│   └── GIT_SETUP.md
+│
+├── tools/                 # 🛠️ Utilities
+│   ├── cheatsheet.md      # Python quick reference
+│   └── test_setup.py      # Verify installation
+│
+├── data/                  # 📊 Data files
+│   ├── raw/               # Original data
+│   └── processed/         # Processed data
+│
+└── days/                  # 📖 30 Daily Lessons
     ├── day-01-variables-and-data-types/
-    │   ├── README.md     # Lesson
-    │   ├── exercise.py   # Practice
-    │   ├── solution.py   # Solutions
-    │   └── quiz.md       # Quiz
+    │   ├── README.md      # Lesson
+    │   ├── exercise.py    # Practice
+    │   ├── solution.py    # Solutions
+    │   └── quiz.md        # Quiz
     ├── day-02-operators-and-expressions/
     └── ... (day-30-capstone-etl-pipeline)
 ```
@@ -119,16 +129,18 @@ You'll be ready for:
 3. **Create virtual environment**: `python -m venv venv`
 4. **Activate it**: `source venv/bin/activate` (Mac/Linux) or `venv\Scripts\activate` (Windows)
 5. **Install packages**: `pip install numpy pandas matplotlib requests`
-6. **Verify setup**: `python resources/test_setup.py`
+6. **Verify setup**: `python tools/test_setup.py`
 7. **Start learning**: Open `days/day-01-variables-and-data-types/README.md`
 
 👉 **See [QUICKSTART.md](./QUICKSTART.md) for detailed step-by-step instructions**
 
-### Additional Resources
+### Documentation & Resources
 
-- 📖 **Detailed Setup**: [resources/SETUP.md](./resources/SETUP.md)
-- 📝 **Quick Reference**: [resources/cheatsheet.md](./resources/cheatsheet.md)
-- 📚 **Curriculum**: [CURRICULUM.md](./CURRICULUM.md)
+- � **[docis/CURRICULUM.md](./docs/CURRICULUM.md)** - Complete day-by-day breakdown
+- � **Q[docs/SETUP.md](./docs/SETUP.md)** - Detailed setup instructions
+- 🆘 **[docs/TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md)** - Common issues & solutions
+- 📝 **[tools/cheatsheet.md](./tools/cheatsheet.md)** - Python quick reference
+- 🤝 **[docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md)** - How to contribute
 
 ---
 
@@ -154,10 +166,10 @@ You'll be ready for:
 
 ## 🆘 Getting Help
 
-- Check [resources/cheatsheet.md](./resources/cheatsheet.md)
+- Check [tools/cheatsheet.md](./tools/cheatsheet.md) for quick reference
+- See [docs/TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md) for common issues
 - Review previous days
 - Google error messages
-- Ask in community Discord
 - Check official Python docs
 
 ---

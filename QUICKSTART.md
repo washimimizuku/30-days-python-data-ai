@@ -111,7 +111,7 @@ pip3 install numpy pandas matplotlib requests
 With virtual environment still activated:
 
 ```bash
-python3 resources/test_setup.py
+python3 tools/test_setup.py
 ```
 
 You should see:
@@ -242,7 +242,7 @@ which python3  # Shows: .../venv/bin/python3 (venv) ✓
 python3 -m pip install -r requirements.txt
 
 # Run scripts with python3
-python3 resources/test_setup.py
+python3 tools/test_setup.py
 
 # Or use pip directly (it's in venv)
 pip install -r requirements.txt
@@ -269,8 +269,8 @@ venv\Scripts\activate     # Windows
 ```
 
 ### Still stuck?
-1. Check [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for detailed solutions
-2. Check [resources/SETUP.md](./resources/SETUP.md) for detailed instructions
+1. Check [docs/TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md) for detailed solutions
+2. Check [docs/SETUP.md](./docs/SETUP.md) for detailed instructions
 3. Google the error message
 4. Ask in community forums
 
@@ -289,9 +289,10 @@ After completing all 30 days, you'll be ready for:
 
 ## Need More Help?
 
-- 📖 **Detailed Setup**: See [resources/SETUP.md](./resources/SETUP.md)
-- 📝 **Quick Reference**: See [resources/cheatsheet.md](./resources/cheatsheet.md)
-- 📚 **Curriculum Overview**: See [CURRICULUM.md](./CURRICULUM.md)
+- 📖 **Detailed Setup**: See [docs/SETUP.md](./docs/SETUP.md)
+- 📝 **Quick Reference**: See [tools/cheatsheet.md](./tools/cheatsheet.md)
+- 🆘 **Troubleshooting**: See [docs/TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md)
+- 📚 **Curriculum Overview**: See [docs/CURRICULUM.md](./docs/CURRICULUM.md)
 - 🏠 **Main README**: See [README.md](./README.md)
 
 ---

@@ -68,9 +68,12 @@ Want to fix a bug or improve content?
 │       ├── exercise.py    # Practice exercises
 │       ├── solution.py    # Complete solutions
 │       └── quiz.md        # Knowledge check
-├── resources/
+├── docs/                 # Documentation
 │   ├── SETUP.md          # Setup instructions
+│   └── ...
+├── tools/                # Utilities
 │   ├── cheatsheet.md     # Quick reference
+│   └── test_setup.py     # Verification
 │   └── test_setup.py     # Verification script
 └── README.md             # Main documentation
 ```

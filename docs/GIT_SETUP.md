@@ -96,9 +96,9 @@ Add these topics to make your repo discoverable:
 - ✅ CONTRIBUTING.md - Contribution guidelines
 
 ### Resources
-- ✅ resources/SETUP.md - Detailed setup
-- ✅ resources/cheatsheet.md - Python reference
-- ✅ resources/test_setup.py - Verification script
+- ✅ docs/SETUP.md - Detailed setup
+- ✅ tools/cheatsheet.md - Python reference
+- ✅ tools/test_setup.py - Verification script
 
 ### Content
 - ✅ 30 days of lessons (120 files)

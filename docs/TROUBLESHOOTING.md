@@ -34,7 +34,7 @@ python3 -m pip install -r requirements.txt
 pip install -r requirements.txt
 
 # Run scripts with python3:
-python3 resources/test_setup.py
+python3 tools/test_setup.py
 
 # The 'pip' command works because it's in your venv
 ```
@@ -189,7 +189,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 
 # Verify
-python resources/test_setup.py
+python tools/test_setup.py
 ```
 
 ---
