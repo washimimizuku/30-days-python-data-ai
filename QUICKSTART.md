@@ -95,13 +95,13 @@ With the virtual environment activated:
 # Mac/Linux - use python3 or pip:
 python3 -m pip install -r requirements.txt
 # OR just:
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 # Windows:
 pip install -r requirements.txt
 
 # For core packages only:
-pip install numpy pandas matplotlib requests
+pip3 install numpy pandas matplotlib requests
 ```
 
 ---
@@ -111,7 +111,7 @@ pip install numpy pandas matplotlib requests
 With virtual environment still activated:
 
 ```bash
-python resources/test_setup.py
+python3 resources/test_setup.py
 ```
 
 You should see:
