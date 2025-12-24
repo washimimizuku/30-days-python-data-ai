@@ -18,3 +18,4 @@ jupyter>=1.0.0       # Day 24: Jupyter Notebooks
 # plotly>=5.14.0     # Interactive plots
 # scipy>=1.10.0      # Scientific computing
 urllib3>=2.6.0 # not directly required, pinned by Snyk to avoid a vulnerability
+tornado>=6.5.3 # not directly required, pinned by Snyk to avoid a vulnerability
